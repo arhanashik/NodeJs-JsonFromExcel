@@ -7,6 +7,7 @@
 ## Setup
 - Download/Clone the repo
 - Go the root directory
+- Create a folder names uploads
 - From cmd run the following command -> npm install
 - Next run -> node app.js
 - The server will be running on port 3030
