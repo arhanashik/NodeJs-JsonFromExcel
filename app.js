@@ -40,6 +40,8 @@
     /** API path that will upload the files */
     app.post('/upload', function(req, res) {
         var exceltojson;
+		var deleteFileAfterConversion = false;
+		
         upload(req, res, function(err){
             if(err){
                  res.json({error_code:1, err_desc:err});
@@ -78,11 +80,13 @@
                 res.json({error_code:1, err_desc:"Corupted excel file"});
             }
 			
-			try {
-				fs.unlinkSync(req.file.path);
-				console.log('uploaded file deleted after converted to json');
-			} catch(e) {
-				console.log(e);
+			if(deleteFileAfterConversion) {
+				try {
+					fs.unlinkSync(req.file.path);
+					console.log('uploaded file deleted after converted to json');
+				} catch(e) {
+					console.log(e);
+				}
 			}
 		})
     }); 
